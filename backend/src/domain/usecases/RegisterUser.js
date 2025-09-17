@@ -1,7 +1,7 @@
 module.exports = function RegisterUser({ userRepo, hasher, tokenService }) {
     return async ({ name, email, password }) => {
       if (!name || !email || !password) throw new Error('All fields are required');
-      const existing = await userRepo.findByEmail(email);
+      const existing = await userRepo.findEmail(email);
       
       if (existing) throw new Error('Email already in use');
       const passwordHash = await hasher.hash(password);
